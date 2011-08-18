@@ -1,0 +1,3 @@
+This is an alpha plugin that enable Mura to use native named caches in both Adobe CF 9.0.1 and Railo. 
+
+Note: In Railo you will need to explicitly create two caches. One named "data" and another named "output" before isntalling the plugin.
