@@ -21,7 +21,7 @@ component  extends="baseCache" output="false"
 		hint="The name of the cache.";
 	
 	public any function init(){
-		variables.cacheName=arguments.name;
+		variables.cacheName=arguments.siteID & "-" &arguments.name;
 		return this;	
 	}
 	
