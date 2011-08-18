@@ -1,0 +1,54 @@
+﻿component  extends="mura.Factory" output="false"
+{
+	
+	public any function init(){
+		if (server.coldfusion.productname eq "Railo"){
+			variables.collection=new cache.ehCacheRailo(argumentCollection=arguments);
+		} else {
+			variables.collection=new cache.ehCacheAdobe(argumentCollection=arguments);
+		}
+		variables.map=variables.collection;
+		variables.isSoft=false;
+		return this;
+	}
+	
+	
+	public any function get(key,context,isSoft=variables.isSoft,timespan=""){
+	
+		
+		//if the key cannot be found and context is passed then push it in
+		if(NOT has( arguments.key ) AND isDefined("arguments.context")){		
+			set( key, arguments.context, arguments.isSoft, arguments.timespan );
+		}
+		
+		//if the key cannot be found then throw an error
+		if(NOT has( arguments.key )){
+			throw(message="Context not found for '#arguments.key#'");
+		}
+
+		//return cached context		
+		return super.get( key );
+	}
+	
+	public any function purge(key){
+		variables.collection.purge(getHashKey( arguments.key ));	
+	}
+	
+	public any function purgeAll(){
+		variables.collection.purgeAll();	
+	}
+	
+	public any function getAll(){
+		return variables.collection.getAll();	
+	}
+	
+	public any function keyExists(key){
+		return variables.collection.has( arguments.key );	
+	}
+	
+	public any function getCollection(){
+		return variables.collection;	
+	}
+	
+	
+}
