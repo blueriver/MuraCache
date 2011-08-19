@@ -25,6 +25,32 @@ component  extends="mura.Factory" output="false"
 		return this;
 	}
 	
+	public any function put(key,obj,isSoft=variables.isSoft,timespan=""){
+		var softRef = "";
+		var hashedKey = getHashKey( arguments.key );
+		var cacheData={};
+		var expires=0;
+		
+		if(isDate(arguments.timespan)){
+			cacheData.expires=now() + arguments.timespan;
+			expires=cacheData.expires;
+		} else {
+			cacheData.expires=dateAdd("d",1,now());
+		}
+		
+		//check to see if this should be a soft reference
+		if(arguments.isSoft){
+			//create the soft reference
+			cacheData.object = createObject( "java", "java.lang.ref.SoftReference" ).init( arguments.obj );
+		} else {
+			//assign object to main collection
+			cacheData.object =arguments.obj;
+		}
+		
+		//assign object to main collection
+		variables.collection.put( hashedKey, cacheData, expires, 0 );
+			
+	}
 	
 	public any function get(key,context,isSoft=variables.isSoft,timespan=""){
 	
