@@ -1,6 +1,8 @@
 MURA CACHE PLUGIN
 This is an alpha plugin that enables Mura to use native named caches in both Adobe CF 9.0.1 and Railo. 
 
+Requires Mura 5.4.4602 or greater.
+
 RAILO ONLY
 In Railo you will need to explicitly create two caches. One named "data" and another named "output" before isntalling the plugin.
 Or, if you want each site to have it's own data and output cache you can create caches following the syntax for each site in your Mura instance:
