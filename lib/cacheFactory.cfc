@@ -11,7 +11,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
 */
-component  extends="mura.Factory" output="false"
+component extends="mura.Factory" output="false"
 {
 	
 	public any function init(){
@@ -21,52 +21,37 @@ component  extends="mura.Factory" output="false"
 			variables.collection=new cache.ehCacheAdobe(argumentCollection=arguments);
 		}
 		variables.map=variables.collection;
-		variables.isSoft=false;
 		return this;
 	}
 	
-	public any function put(key,obj,isSoft=variables.isSoft,timespan=""){
-		var softRef = "";
-		var hashedKey = getHashKey( arguments.key );
-		var cacheData={};
+	public any function set(key,context,timespan=""){
 		var expires=0;
 		
 		if(isDate(arguments.timespan)){
-			cacheData.expires=now() + arguments.timespan;
-			expires=cacheData.expires;
-		} else {
-			cacheData.expires=dateAdd("d",1,now());
+			expires=now() + arguments.timespan;
 		}
 		
-		//check to see if this should be a soft reference
-		if(arguments.isSoft){
-			//create the soft reference
-			cacheData.object = createObject( "java", "java.lang.ref.SoftReference" ).init( arguments.obj );
-		} else {
-			//assign object to main collection
-			cacheData.object =arguments.obj;
-		}
-		
-		//assign object to main collection
-		variables.collection.put( hashedKey, cacheData, expires, 0 );
+		variables.collection.put( getHashKey( arguments.key ), arguments.context, 0, 0 );
 			
 	}
 	
-	public any function get(key,context,isSoft=variables.isSoft,timespan=""){
-	
+	public any function get(key,context,timespan=""){
 		
-		//if the key cannot be found and context is passed then push it in
-		if(NOT has( arguments.key ) AND isDefined("arguments.context")){		
-			set( key, arguments.context, arguments.isSoft, arguments.timespan );
+		if(NOT has( arguments.key ) AND isDefined("arguments.context")){	
+			set( arguments.key, arguments.context,arguments.timespan );
 		}
 		
-		//if the key cannot be found then throw an error
 		if(NOT has( arguments.key )){
 			throw(message="Context not found for '#arguments.key#'");
 		}
 
-		//return cached context		
-		return super.get( key );
+		if(NOT has( arguments.key ) AND hasParent() AND getParent().has( arguments.key )){
+			return getParent().get( arguments.key );
+		}
+
+		if(has( arguments.key )){
+			return variables.collection.get(getHashKey( arguments.key ));
+		}
 	}
 	
 	public any function purge(key){
@@ -81,8 +66,8 @@ component  extends="mura.Factory" output="false"
 		return variables.collection.getAll();	
 	}
 	
-	public any function keyExists(key){
-		return variables.collection.has( arguments.key );	
+	public any function has(key){
+		return variables.collection.has(getHashKey( arguments.key ) );	
 	}
 	
 	public any function getCollection(){
