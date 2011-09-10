@@ -16,9 +16,9 @@ component extends="mura.Factory" output="false"
 	
 	public any function init(){
 		if (server.coldfusion.productname eq "Railo"){
-			variables.collection=new cache.ehCacheRailo(argumentCollection=arguments);
+			variables.collection=new cache.cacheRailo(argumentCollection=arguments);
 		} else {
-			variables.collection=new cache.ehCacheAdobe(argumentCollection=arguments);
+			variables.collection=new cache.cacheAdobe(argumentCollection=arguments);
 		}
 		variables.map=variables.collection;
 		return this;
