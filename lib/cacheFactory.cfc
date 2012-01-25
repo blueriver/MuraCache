@@ -24,18 +24,13 @@ component extends="mura.Factory" output="false"
 		return this;
 	}
 	
-	public any function set(key,context,timespan=""){
-		var expires=0;
+	public any function set(key,context,timespan=0){
 		
-		if(isDate(arguments.timespan)){
-			expires=now() + arguments.timespan;
-		}
-		
-		variables.collection.put( getHashKey( arguments.key ), arguments.context, 0, 0 );
+		variables.collection.put( getHashKey( arguments.key ), arguments.context, timespan, 0 );
 			
 	}
 	
-	public any function get(key,context,timespan=""){
+	public any function get(key,context,timespan=0){
 		
 		if(NOT has( arguments.key ) AND isDefined("arguments.context")){	
 			set( arguments.key, arguments.context,arguments.timespan );
