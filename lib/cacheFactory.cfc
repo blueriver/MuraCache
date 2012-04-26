@@ -35,10 +35,6 @@ component extends="mura.Factory" output="false"
 		if(NOT has( arguments.key ) AND isDefined("arguments.context")){	
 			set( arguments.key, arguments.context,arguments.timespan );
 		}
-		
-		if(NOT has( arguments.key )){
-			throw(message="Context not found for '#arguments.key#'");
-		}
 
 		if(NOT has( arguments.key ) AND hasParent() AND getParent().has( arguments.key )){
 			return getParent().get( arguments.key );
@@ -46,6 +42,10 @@ component extends="mura.Factory" output="false"
 
 		if(has( arguments.key )){
 			return variables.collection.get(getHashKey( arguments.key ));
+		}
+
+		if(NOT has( arguments.key )){
+			throw(message="Context not found for '#arguments.key#'");
 		}
 	}
 	
