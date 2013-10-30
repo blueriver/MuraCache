@@ -1,4 +1,4 @@
-﻿/*Copyright 2011 Blue River Interactive
+/*Copyright 2011 Blue River Interactive
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -24,13 +24,13 @@ component extends="mura.Factory" output="false"
 		return this;
 	}
 	
-	public any function set(key,context,timespan=0){
+	public any function set(key,context,timespan=1){
 		
-		variables.collection.put( getHashKey( arguments.key ), arguments.context, timespan, 0 );
+		variables.collection.put( getHashKey( arguments.key ), arguments.context, timespan, 1 );
 			
 	}
 	
-	public any function get(key,context,timespan=0){
+	public any function get(key,context,timespan=1){
 		
 		if(NOT has( arguments.key ) AND isDefined("arguments.context")){	
 			set( arguments.key, arguments.context,arguments.timespan );
