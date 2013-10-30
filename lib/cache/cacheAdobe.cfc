@@ -40,14 +40,14 @@ component  extends="cacheBase" output="false"
 		return CacheGetAllIds(variables.cacheName);
 	}
 	
-	public any function put(key,value,timespan=0,idleTime=0){
+	public any function put(key,value,timespan=1,idleTime=1){
 		
 		if(arguments.timespan eq ""){
-			arguments.timespan=0;
+			arguments.timespan=1;
 		}
 		
 		if(arguments.idleTime eq ""){
-			arguments.idleTime=0;
+			arguments.idleTime=1;
 		}
 			
 		cachePut(arguments.key, 
