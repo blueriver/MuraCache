@@ -24,9 +24,9 @@ component extends="mura.Factory" output="false"
 		return this;
 	}
 	
-	public any function set(key,context,timespan=1){
+	public any function set(key,context,timespan=1,idleTime=1){
 		
-		variables.collection.put( getHashKey( arguments.key ), arguments.context, timespan, 1 );
+		variables.collection.put( getHashKey( arguments.key ), arguments.context, arguments.timespan, arguments.idleTime );
 			
 	}
 	
