@@ -30,10 +30,10 @@ component extends="mura.Factory" output="false"
 			
 	}
 	
-	public any function get(key,context,timespan=1){
+	public any function get(key,context,timespan=1,idleTime=1){
 		
 		if(NOT has( arguments.key ) AND isDefined("arguments.context")){	
-			set( arguments.key, arguments.context,arguments.timespan );
+			set( arguments.key, arguments.context,arguments.timespan,arguments.idleTime );
 		}
 
 		if(NOT has( arguments.key ) AND hasParent() AND getParent().has( arguments.key )){
