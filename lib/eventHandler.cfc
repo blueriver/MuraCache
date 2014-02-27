@@ -15,7 +15,19 @@ component  extends="mura.plugin.pluginGenericEventHandler" output="false"
 {
 
 	public void function onApplicationLoad($){
-	  getBean("settingsManager").injectMethod("createCacheFactory",createCacheFactory);	
+		var siteManager=getBean("settingsManager");
+	  	siteManager.injectMethod("createCacheFactory",createCacheFactory);	
+
+		var rs=siteManager.getList();
+		var cacheStruct={};
+		for(var i=1; i <= rs.recordcount; i++){
+			cacheStruct={
+				data=createCacheFactory(name='data',siteid=rs.siteid[i]),
+				output=createCacheFactory(name='output',siteid=rs.siteid[i])
+			};
+
+			siteManager.getSite(rs.siteid).setCacheFactory(cacheStruct);	
+		}
 	}
 	
 	public any function createCacheFactory(){
