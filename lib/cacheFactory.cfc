@@ -44,7 +44,9 @@ component extends="mura.Factory" output="false"
 			return variables.collection.get(getHashKey( arguments.key ));
 		}
 
-		if(NOT has( arguments.key )){
+		if(isDefined("arguments.context")){
+			return arguments.context;
+		} else {
 			throw(message="Context not found for '#arguments.key#'");
 		}
 	}
