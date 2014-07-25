@@ -24,8 +24,8 @@ component  extends="cacheBase" output="false"
 	public any function init(){
 		variables.cacheName=arguments.siteID & "-" &arguments.name;
 
-		if(listFirst(server.coldfusion.productversion) eq 10 
-			and not cacheRegionExists(variables.cacheName)){
+		if( Val(ListFirst(server.coldfusion.productversion)) >= 10 
+			&& !cacheRegionExists(variables.cacheName) ) {
 				cacheRegionNew(variables.cacheName);
 		}
 
