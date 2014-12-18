@@ -18,7 +18,7 @@ component  extends="mura.plugin.pluginGenericEventHandler" output="false"
 		var siteManager=getBean("settingsManager");
 	  	siteManager.injectMethod("createCacheFactory",createCacheFactory);	
 
-		var rs=siteManager.getList();
+		var rs=variables.pluginConfig.getAssignedSites();
 		var cacheStruct={};
 		for(var i=1; i <= rs.recordcount; i++){
 			cacheStruct={
