@@ -26,7 +26,7 @@ component  extends="mura.plugin.pluginGenericEventHandler" output="false"
 				output=createCacheFactory(name='output',siteid=rs.siteid[i])
 			};
 
-			siteManager.getSite(rs.siteid).setCacheFactories(cacheStruct);	
+			siteManager.getSite(rs.siteid[i]).setCacheFactories(cacheStruct);	
 		}
 	}
 	
