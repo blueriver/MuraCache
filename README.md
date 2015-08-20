@@ -1,5 +1,5 @@
-#MURA CACHE PLUGIN
-This is an alpha plugin that enables Mura to use native named caches in Adobe CF 9.0.1+, Railo, and Lucee. 
+#MuraCache Plugin
+This is an alpha [Mura CMS](http://www.getmura.com) plugin that enables Mura to use native named caches in Adobe CF 9.0.1+, Railo, and Lucee. 
 
 Requires Mura 5.4.4602 or greater.
 
