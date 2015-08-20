@@ -1,4 +1,5 @@
-/*Copyright 2011 Blue River Interactive
+/*
+  Copyright 2011-2015 Blue River Interactive
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -11,12 +12,11 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
 */
-component  extends="mura.plugin.pluginGenericEventHandler" output="false"
-{
+component  extends="mura.plugin.pluginGenericEventHandler" output="false" {
 
-	public void function onApplicationLoad($){
+	public void function onApplicationLoad($) {
 		var siteManager=getBean("settingsManager");
-	  	siteManager.injectMethod("createCacheFactory",createCacheFactory);	
+	  siteManager.injectMethod("createCacheFactory",createCacheFactory);	
 
 		var rs=variables.pluginConfig.getAssignedSites();
 		var cacheStruct={};
@@ -30,10 +30,8 @@ component  extends="mura.plugin.pluginGenericEventHandler" output="false"
 		}
 	}
 	
-	public any function createCacheFactory(){
+	public any function createCacheFactory() {
 		return new cacheFactory(argumentCollection=arguments); 
 	}	
-	
-
 
 }
