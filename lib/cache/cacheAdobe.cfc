@@ -12,8 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
 */
-component  extends="cacheBase" output="false"
-{
+component  extends="cacheBase" output="false" {
 
 	property name="cacheName" 
 		type="string" 

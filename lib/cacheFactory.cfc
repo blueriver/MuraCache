@@ -12,8 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
 */
-component extends="mura.Factory" output="false"
-{
+component extends="mura.Factory" output="false" {
 	
 	public any function init() {
 		if ( ListFindNoCase('Railo,Lucee',  server.coldfusion.productname) ) {
