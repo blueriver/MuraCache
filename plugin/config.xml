@@ -1,5 +1,5 @@
 <!--
-   Copyright 2011 Blue River Interactive
+   Copyright 2011-2015 Blue River Interactive
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 <name>Mura Cache</name>
 <package>MuraCache</package>
 <directoryFormat>packageOnly</directoryFormat>
-<version>0</version>
+<version>0.1.0</version>
 <loadPriority>1</loadPriority>
 <provider>Blue River</provider>
 <providerURL>http://blueriver.com</providerURL>

@@ -1,4 +1,5 @@
-/*Copyright 2011 Blue River Interactive
+/*
+	Copyright 2011-2015 Blue River Interactive
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,9 +15,9 @@
 component extends="mura.Factory" output="false"
 {
 	
-	public any function init(){
-		if (server.coldfusion.productname eq "Railo"){
-			variables.collection=new cache.cacheRailo(argumentCollection=arguments);
+	public any function init() {
+		if ( ListFindNoCase('Railo,Lucee',  server.coldfusion.productname) ) {
+			variables.collection=new cache.cacheLucee(argumentCollection=arguments);
 		} else {
 			variables.collection=new cache.cacheAdobe(argumentCollection=arguments);
 		}
@@ -24,50 +25,50 @@ component extends="mura.Factory" output="false"
 		return this;
 	}
 	
-	public any function set(key,context,timespan=1,idleTime=1){
+	public any function set(key,context,timespan=1,idleTime=1) {
 		
 		variables.collection.put( getHashKey( arguments.key ), arguments.context, arguments.timespan, arguments.idleTime );
 			
 	}
 	
-	public any function get(key,context,timespan=1,idleTime=1){
+	public any function get(key,context,timespan=1,idleTime=1) {
 		
-		if(NOT has( arguments.key ) AND isDefined("arguments.context")){	
+		if ( !has( arguments.key ) && isDefined("arguments.context") ) {	
 			set( arguments.key, arguments.context,arguments.timespan,arguments.idleTime );
 		}
 
-		if(NOT has( arguments.key ) AND hasParent() AND getParent().has( arguments.key )){
+		if ( !has( arguments.key ) && hasParent() && getParent().has( arguments.key ) ) {
 			return getParent().get( arguments.key );
 		}
 
-		if(has( arguments.key )){
+		if ( has( arguments.key ) ) {
 			return variables.collection.get(getHashKey( arguments.key ));
 		}
 
-		if(isDefined("arguments.context")){
+		if ( isDefined("arguments.context") ) {
 			return arguments.context;
 		} else {
 			throw(message="Context not found for '#arguments.key#'");
 		}
 	}
 	
-	public any function purge(key){
+	public any function purge(key) {
 		variables.collection.purge(getHashKey( arguments.key ));	
 	}
 	
-	public any function purgeAll(){
+	public any function purgeAll() {
 		variables.collection.purgeAll();	
 	}
 	
-	public any function getAll(){
+	public any function getAll() {
 		return variables.collection.getAll();	
 	}
 	
-	public any function has(key){
+	public any function has(key) {
 		return variables.collection.has(getHashKey( arguments.key ) );	
 	}
 	
-	public any function getCollection(){
+	public any function getCollection() {
 		return variables.collection;	
 	}
 	
