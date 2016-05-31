@@ -44,14 +44,14 @@ component  extends="cacheBase" output="false" {
 		return cacheGetAll(filter="", cacheName=variables.cacheName);
 	}
 	
-	public any function put(key,value,timespan=1,idleTime=1){
+	public any function put(key,value,timespan=createtimespan(1,0,0,0),idleTime=createtimespan(1,0,0,0)){
 		
 		if(arguments.timespan eq ""){
-			arguments.timespan=1;
+			arguments.timespan=createtimespan(1,0,0,0);
 		}
 		
 		if(arguments.idleTime eq ""){
-			arguments.idleTime=1;
+			arguments.idleTime=createtimespan(1,0,0,0);
 		}
 		
 		cachePut(id=arguments.key, 
