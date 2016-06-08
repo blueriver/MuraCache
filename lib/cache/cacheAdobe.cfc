@@ -24,6 +24,10 @@ component  extends="cacheBase" output="false" {
 	public any function init(){
 		variables.cacheName=arguments.siteID & "-" &arguments.name;
 
+		if (structkeyexists(arguments, "instanceName") and len(arguments.instanceName)) {
+			variables.cacheName=arguments.instanceName & "-" & variables.cacheName;
+		}
+
 		if( Val(ListFirst(server.coldfusion.productversion)) >= 10 
 			&& !cacheRegionExists(variables.cacheName) ) {
 				cacheRegionNew(variables.cacheName);

@@ -23,6 +23,10 @@ component  extends="cacheBase" output="false" {
 	public any function init(){
 		
 		variables.cacheName=arguments.siteID & "-" & arguments.name;
+
+		if (structkeyexists(arguments, "instanceName") and len(arguments.instanceName)) {
+			variables.cacheName=arguments.instanceName & "-" & variables.cacheName;
+		}
 		
 		try
         {

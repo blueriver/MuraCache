@@ -22,7 +22,21 @@
 <provider>Blue River</provider>
 <providerURL>http://blueriver.com</providerURL>
 <category>Application</category>
-<settings/>
+<settings>
+    <setting>
+        <name>instanceName</name>
+        <label>Instance name (optional)</label>
+        <hint>If provided, cache will be have {InstanceName}- added to the start of its name</hint>
+        <type>text</type>
+        <required>false</required>
+        <validation>regex</validation>
+        <regex>^[a-zA-Z0-9]+$</regex>
+        <message>Please enter only letters and numbers</message>
+        <defaultValue></defaultValue>
+        <optionList></optionList>
+        <optionLabelList></optionLabelList>
+    </setting>
+</settings>
 <eventHandlers>
 	<eventHandler event="onApplicationLoad" component="lib.eventHandler" persist="false"/>
 </eventHandlers>

@@ -19,11 +19,12 @@ component  extends="mura.plugin.pluginGenericEventHandler" output="false" {
 	  siteManager.injectMethod("createCacheFactory",createCacheFactory);	
 
 		var rs=variables.pluginConfig.getAssignedSites();
+		var instanceName=variables.pluginConfig.getSetting("instanceName");
 		var cacheStruct={};
 		for(var i=1; i <= rs.recordcount; i++){
 			cacheStruct={
-				data=createCacheFactory(name='data',siteid=rs.siteid[i]),
-				output=createCacheFactory(name='output',siteid=rs.siteid[i])
+				data=createCacheFactory(name='data',siteid=rs.siteid[i],instanceName=instanceName),
+				output=createCacheFactory(name='output',siteid=rs.siteid[i],instanceName=instanceName)
 			};
 
 			siteManager.getSite(rs.siteid[i]).setCacheFactories(cacheStruct);	
